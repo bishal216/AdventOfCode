@@ -4,7 +4,7 @@ lines = open('AoC2021/inputs/Day1.txt','r').readlines()
 #Program
 incCounter =0;
 inc3Counter =0;
-for i in range(1,len(lines),1):
+for i in range(len(lines)):
     if(int(lines[i-1]) < int(lines[i])):
         incCounter += 1 
     if(i>3):
