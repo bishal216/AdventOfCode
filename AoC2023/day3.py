@@ -1,10 +1,7 @@
 lines = [line.strip() for line in open('AoC2023/inputs/day3.txt','r').readlines()]
 
-
 def get_numbers(lines):
-    nums = {}
-    symbols = {}
-    index  = 0
+    nums, symbols, index = {}, {}, 0
     for row,line in enumerate(lines):
         current = ''
         for col, chr in enumerate(line):
@@ -14,15 +11,13 @@ def get_numbers(lines):
                 if current: 
                     for i in range(col-len(current), col):
                         nums[(row,i)] = (index, int(current))
-                    index += 1
-                    current = ''
+                    current, index = '', index+1
                 if chr != '.':
                     symbols[(row, col)] = chr
             if col == len(line) - 1 and current:
                 for i in range(col-len(current), col):
                     nums[(row,i)] = (index, int(current))
-                current = ''
-                index += 1
+                current, index = '', index + 1
     return nums, symbols
         
 def part1(lines):
