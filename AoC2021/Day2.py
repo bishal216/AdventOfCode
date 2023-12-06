@@ -1,21 +1,21 @@
 # input
 lines = open('AOC2021/inputs/Day2.txt','r').readlines()
+lines = [line.strip().split(' ') for line in lines]
 
-# Program
-horz =0 
-depth =0
-depth2=0
+def part1(lines):
+    h, v = 0, 0
+    for dir, val in lines:
+        h += int(val) * (dir == 'forward')
+        v += int(val) * (-(dir == 'up') + (dir == 'down')) 
+    return h * v
 
-for line in lines:
-    line = line.rstrip()
-    dist,leng = line.split(' ')
-    if(dist == 'down'):
-        depth += int(leng)
-    elif(dist == 'up'):
-        depth -= int(leng)
-    else:
-        horz += int(leng)
-        depth2 += int(leng)*depth
-    
-print(horz * depth)
-print(horz * depth2)
+def part2(lines):
+    h, v, aim = 0, 0, 0
+    for dir, val in lines:
+        h += int(val) * (dir == 'forward') 
+        v += int(val) * (dir == 'forward') * aim
+        aim += int(val) * (-(dir == 'up') + (dir == 'down')) 
+    return h * v
+
+print(part1(lines)) 
+print(part2(lines))
