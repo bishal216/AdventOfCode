@@ -39,29 +39,46 @@ def part1(lines):
             minimum = seed
     return minimum
 
-# def part2(lines):
-#     seed_map, other_map = get_maps(lines)
-#     seeds = [(seed_map[i], seed_map[i] + seed_map[i + 1]) for i in range(0, len(seed_map), 2)]
+def find_intersections(list1, list2, src, dest):
+    i, j = 0, 0
+    new_list = []
+    while i < len(list1) or j < len(list2):
+        seed = list1[i]
+        mapped_destination = list2[j]
+        while(True):
+            if seed[0] < mapped_destination[0]:
+                new_list.append((seed[0], mapped_destination[0]-1))
+                seed[0] = mapped_destination[0]
+            if seed[0] >= mapped_destination[0]:
+                if seed[0] > mapped_destination[1]:
+                    pass
+                    
+                    
+def part2(lines):
+    seed_map, other_map = get_maps(lines)
+    seeds = [(seed_map[i], seed_map[i] + seed_map[i + 1]) for i in range(0, len(seed_map), 2)]
 
-#     for mapp in other_map:
-#         mapp = sorted(mapp, key=lambda x: x[1])
-#         mapped_seeds = []
+    for mapp in other_map:
+        mapp = sorted(mapp, key=lambda x: x[1])
+        mapped_seeds = []
+        for seed_start, seed_end in seeds:
+            print(seed_start, seed_end)
+        #     for dest, src, length in mapp:
+        #         while seed_start < seed_end:
+        #             if seed_start < src:
+        #                 mapped_seeds.append((seed_start, src - 1))
+        #                 seed_start = src
 
-#         for seed_start, seed_end in seeds:
-#             for dest, src, length in mapp:
-#                 while seed_start < seed_end:
-#                     if seed_start < src:
-#                         mapped_seeds.append((seed_start, src - 1))
-#                         seed_start = src
+        #             if seed_start >= src and seed_start < src + length:
+        #                 mapped_end = min(src + length - 1, seed_end)
+        #                 seed_start = mapped_end + 1
+        #                 mapped_seeds.append((dest, seed_start - 1))
 
-#                     if seed_start >= src and seed_start < src + length:
-#                         mapped_end = min(src + length - 1, seed_end)
-#                         seed_start = mapped_end + 1
-#                         mapped_seeds.append((dest, seed_start - 1))
+        # seeds = sorted(mapped_seeds, key=lambda x: x[0])
 
-#         seeds = sorted(mapped_seeds, key=lambda x: x[0])
+    return seeds[0][0] if seeds else None
 
-#     return seeds[0][0] if seeds else None
+
 
 print(part1(lines))
-# print(part2(lines))
+print(part2(lines))
