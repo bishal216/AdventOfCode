@@ -1,11 +1,9 @@
-letters = {'one': '1', 'two': '2', 'three': '3', 'four': '4','five': '5','six': '6','seven': '7','eight': '8','nine': '9'}
+
 lines = open('AoC2023/inputs/Day1.txt','r').readlines()
 
 def replace_text_with_digits(line):
-    for letter in letters:
-        while letter in line:
-            line = line.replace(letter, letter[0]+letters[letter]+letter[-1])
-    return line
+    letters = {'one': '1', 'two': '2', 'three': '3', 'four': '4','five': '5','six': '6','seven': '7','eight': '8','nine': '9'}
+    return ''.join([line.replace(letter, letter[0] + letters[letter] + letter[-1]) if letter in line else line for letter in letters])
 
 def part1(lines):
     sum = 0
