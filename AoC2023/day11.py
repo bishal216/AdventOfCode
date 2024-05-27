@@ -1,23 +1,38 @@
-lines = open('AoC2023/inputs/day11.txt').readlines()
-# lines = open('AoC2023/inputs/test.txt').readlines()
+lines = open('./inputs/day11.txt').readlines()
 lines = [line.strip() for line in lines]
 
-def expand_lines(lines):
-    new_lines = []
-    for line in lines:
-        new_lines.append(line)
-        if all([i == '.' for i in line]):
-            new_lines.append(line)
-    return new_lines
+def expand_lines(lines, value, is_row=True):
+    value = value - 1
+    expansion = 0
+    for row_idx, line in enumerate(lines):
+        if all([char[0] == '.' for char in line]):
+            expansion += 1
+        lines[row_idx] = [
+            (tup[0], (tup[1][0] + expansion * value * is_row, tup[1][1] + expansion * value * (not is_row)))
+            for tup in line
+        ]
+    return lines
 
-def part1(lines):
-    lines = expand_lines(list(zip(*expand_lines(lines))))
-    lines = list(zip(*lines))
+def lines_to_dict(lines, value):
+    new_lines = []
+    for row_idx, line in enumerate(lines):
+        new_line = []
+        for col_idx, val in enumerate(line):
+            new_line.append((val, (row_idx, col_idx)))
+        new_lines.append(new_line)
+
+    expanded_lines = expand_lines(new_lines, value, is_row=True)
+    expanded_lines = list(zip(*expand_lines(list(zip(*expanded_lines)), value, is_row=False)))
+    return expanded_lines
+
+def part_X(lines, VAL):
+    lines = lines_to_dict(lines, VAL)
+
     galaxies = []
-    for row, line in enumerate(lines):
-        for col, val in enumerate(line):
-            if val == '#':
-                galaxies.append((row, col))
+    for _, line in enumerate(lines):
+        for _, val in enumerate(line):
+            if val[0] == '#':
+                galaxies.append(val[1])
     distance = 0
     for i, (x, y) in enumerate(galaxies):
         for j, (x2, y2) in enumerate(galaxies):
@@ -25,40 +40,5 @@ def part1(lines):
                 distance += abs(x2-x) + abs(y2-y)
     return distance
 
-def expandable_lines(lines):
-    expand = []
-    for i, line in enumerate(lines):
-        if all([i == '.' for i in line]):
-            expand.append(i)
-    return expand
-
-def part1(lines):
-    lines = expand_lines(list(zip(*expand_lines(lines))))
-    lines = list(zip(*lines))
-    galaxies = []
-    for row, line in enumerate(lines):
-        for col, val in enumerate(line):
-            if val == '#':
-                galaxies.append((row, col))
-    distance = 0
-    for i, (x, y) in enumerate(galaxies):
-        for j, (x2, y2) in enumerate(galaxies):
-            if j>i:
-                distance += abs(x2-x) + abs(y2-y)
-
-def part2(lines):
-    lines = expand_lines(list(zip(*expand_lines(lines))))
-    lines = list(zip(*lines))
-    galaxies = []
-    for row, line in enumerate(lines):
-        for col, val in enumerate(line):
-            if val == '#':
-                galaxies.append((row, col))
-    distance = 0
-    for i, (x, y) in enumerate(galaxies):
-        for j, (x2, y2) in enumerate(galaxies):
-            if j>i:
-                distance += abs(x2-x) + abs(y2-y)
-            
-print(part1(lines))
-    
+print(part_X(lines, 2))
+print(part_X(lines, 1000000))

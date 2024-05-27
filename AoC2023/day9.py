@@ -1,4 +1,4 @@
-lines = open('AoC2023/inputs/day9.txt', 'r').readlines()
+lines = open('./inputs/day9.txt', 'r').readlines()
 lines = [[int(i) for i in line.strip().split()] for line in lines]
 
 def part1(lines):

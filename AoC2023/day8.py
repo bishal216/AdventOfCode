@@ -1,4 +1,4 @@
-lines = open('Aoc2023/inputs/day8.txt', 'r').readlines()
+lines = open('./inputs/day8.txt', 'r').readlines()
 
 def parse_lines(lines):
     instruction = lines[0].strip()
@@ -37,7 +37,7 @@ def lcm_array(array):
     for i in array[1:]:
         base = lcm(base, i)
     return base
-    
+
 def part2(lines):
     instruction, instruction_set = parse_lines(lines)
     nodes = [node for node in list(instruction_set.keys()) if node[-1] =='A']

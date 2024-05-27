@@ -1,5 +1,5 @@
 total_cubes = {'red': 12, 'blue': 14, 'green': 13}
-lines = open('AoC2023/inputs/day2.txt','r').readlines()
+lines = open('./inputs/day2.txt','r').readlines()
 
 def get_number_of_cubes_in_each_game(game):
     cubes = {'red': 0, 'blue': 0, 'green': 0}
@@ -15,9 +15,9 @@ def part1(lines):
         games_id, cube_stats = line.strip().split(':')
         games_id = int(games_id.split(' ')[1])
         cubes = get_number_of_cubes_in_each_game(cube_stats)
-        
+
         # part 1 logic
-        if(all([cubes[color] <= total_cubes[color] for color in cubes])):           
+        if(all([cubes[color] <= total_cubes[color] for color in cubes])):
             summ += games_id
     return summ
 
@@ -27,12 +27,12 @@ def part2(lines):
         games_id, cube_stats = line.strip().split(':')
         games_id = int(games_id.split(' ')[1])
         cubes = get_number_of_cubes_in_each_game(cube_stats)
-        
+
         # part 2 logic
         p = 1
         for i in cubes.values():
             p *= i
-        summ += p 
+        summ += p
     return summ
 
 print(part1(lines))

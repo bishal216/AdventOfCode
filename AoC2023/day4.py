@@ -1,4 +1,4 @@
-lines = open('AoC2023/inputs/day4.txt','r').readlines()
+lines = open('./inputs/day4.txt','r').readlines()
 
 def get_nums(game):
     _, nums = game.strip().split(':')

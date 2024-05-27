@@ -1,4 +1,4 @@
-lines = [line.strip() for line in open('AoC2023/inputs/day3.txt','r').readlines()]
+lines = [line.strip() for line in open('./inputs/day3.txt','r').readlines()]
 
 def get_numbers(lines):
     nums, symbols, index = {}, {}, 0
@@ -8,7 +8,7 @@ def get_numbers(lines):
             if chr.isdigit():
                 current += chr
             else:
-                if current: 
+                if current:
                     for i in range(col-len(current), col):
                         nums[(row,i)] = (index, int(current))
                     current, index = '', index+1
@@ -19,7 +19,7 @@ def get_numbers(lines):
                     nums[(row,i)] = (index, int(current))
                 current, index = '', index + 1
     return nums, symbols
-        
+
 def part1(lines):
     nums, symbols = get_numbers(lines)
     adjacent_nums = set([nums.get((i, j)) for row, col in symbols for i in range(row-1, row+2) for j in range(col-1, col+2) if nums.get((i, j))])
@@ -34,6 +34,6 @@ def part2(lines):
             if len(adjacent_nums) == 2:
                 summ += adjacent_nums[0][1] * adjacent_nums[1][1]
     return (summ)
- 
+
 print(part1(lines))
 print(part2(lines))

@@ -1,4 +1,4 @@
-lines = [line.strip().split()  for line in open('AoC2023/inputs/day7.txt', 'r').readlines()]
+lines = [line.strip().split()  for line in open('./inputs/day7.txt', 'r').readlines()]
 
 def get_precedence_part1(card_hand):
     card_counts = sorted([card_hand.count(card) for card in set(card_hand)])

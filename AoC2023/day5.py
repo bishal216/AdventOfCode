@@ -1,5 +1,4 @@
-# # lines = open('AoC2023/inputs/test.txt').readlines()
-lines = open('AoC2023/inputs/day5.txt').readlines()
+lines = open('./inputs/day5.txt').readlines()
 
 def get_maps(lines):
     maps = []
