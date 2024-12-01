@@ -12,14 +12,7 @@ def separate_configs(lines):
 def get_configs(config):
     possible_configs = []
     conf1, conf2 = config
-    while conf1 and conf2 and len(conf1[0]) == conf2[0]:
-        conf1 = conf1[1:]
-        conf2 = conf2[1:]
-    while conf1 and conf2 and len(conf1[-1]) == conf2[-1]:
-        conf1 = conf1[:-1]
-        conf2 = conf2[:-1]
-    if not conf1 and not conf2:
-        possible_configs.append(config[0])
+
     print(conf1, conf2)
     print(possible_configs)
     print('=========================')
