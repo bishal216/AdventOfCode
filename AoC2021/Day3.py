@@ -1,5 +1,5 @@
 # Inputs
-lines = open('AoC2021/inputs/Day3.txt').readlines()
+lines = open('AoC2021/inputs/day3.txt').readlines()
 lines = [[ int(char) for char in line.strip()] for line in lines]
 lines_zip = list(zip(*lines))
 
