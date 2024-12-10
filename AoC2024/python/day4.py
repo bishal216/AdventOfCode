@@ -6,7 +6,6 @@ def find_xmas_indices(lines):
         for c, col in enumerate(row):
             if col in positions:
                 positions[col].append((r, c))
-
     return positions
 
 def check_adjacency(x, y):
